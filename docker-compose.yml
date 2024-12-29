@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_PASSWORD: pgadmin  # Change this to your desired password
+      POSTGRES_USER: pgadmin        # You can change the username if needed
+      POSTGRES_DB: school               # The default database to create
+    ports:
+      - "5432:5432"                     # Exposes PostgreSQL on port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persists database data between container restarts
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_network:
+    driver: bridge
